@@ -21,6 +21,7 @@ defmodule Vancouver.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:ex_json_schema, "~> 0.11.0"},
       {:plug, "~> 1.15"}
     ]
   end
