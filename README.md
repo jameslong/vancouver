@@ -1,21 +1,74 @@
-# Vancouver
+# WIP: Vancouver
 
-**TODO: Add description**
+Helper library to make it quick and easy to add MCP server capability to your Phoenix/Bandit project. Vancouver handles initialization, request validation, and offers helper functions to simplify the creation of MCP tools. 
 
-## Installation
+Note, Vancouver is currently in-development, however, the dev UX will look something like this:
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `vancouver` to your list of dependencies in `mix.exs`:
+### 1. Add dependency
+
+In `mix.exs`:
 
 ```elixir
-def deps do
+defp deps do
   [
     {:vancouver, "~> 0.1.0"}
   ]
 end
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/vancouver>.
+### 2. Add your tools
+
+```elixir
+defmodule MyProject.Tools.ExampleTool do
+  @moduledoc """
+  Implements the `ExampleTool` tool.
+  """
+
+  use Vancouver.Tool
+
+  def name, do: "example_tool"
+  def description, do: "An example tool for demonstration purposes"
+
+  def input_schema do
+    %{
+      "type" => "object",
+      "description" => "Input parameters for the example tool",
+      "properties" => %{
+        "example_param" => %{
+          "type" => "string",
+          "description" => "An example parameter for the tool"
+        }
+      },
+      "required" => ["example_param"],
+      "additionalProperties" => false
+    }
+  end
+
+  def run(%{"example_param" => example_param}) do
+    {:ok, "Example tool executed successfully with param: #{example_param}"}
+  end
+end
+```
+
+### 3. Update the config
+
+In `config.ex`:
+
+```elixir
+config :vancouver,
+  name: "My MCP Server",
+  version: "1.0.0",
+  tools: [
+    MyProject.Tools.ExampleTool
+  ]
+```
+
+### 4. Add your MCP route
+
+In `router.ex`:
+
+```elixir
+post("/mcp/v1", do: Vancouver.McpPipeline.call(conn, []))
+```
+
 
