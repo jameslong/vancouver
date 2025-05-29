@@ -2,6 +2,8 @@ defmodule Vancouver.Tool do
   @moduledoc """
   Behaviour for Mcp tools.
   """
+  alias Vancouver.JsonRpc2
+  alias Vancouver.Method
 
   @doc """
   The tool's name identifier (must be a string).
@@ -23,11 +25,12 @@ defmodule Vancouver.Tool do
 
   Should return {:ok, result} on success or {:error, message} on failure.
   """
-  @callback run(conn :: Plug.Conn.t(), params :: map()) :: {:ok, any()} | {:error, String.t()}
+  @callback run(conn :: Plug.Conn.t(), params :: map()) :: Plug.Conn.t()
 
   defmacro __using__(_opts) do
     quote do
       @behaviour Vancouver.Tool
+      import Vancouver.Tool
 
       def definition do
         %{
@@ -41,5 +44,36 @@ defmodule Vancouver.Tool do
         Vancouver.JsonRpc2.validate_schema(input_schema(), arguments)
       end
     end
+  end
+
+  def send_text(%Plug.Conn{} = conn, text) when is_binary(text) do
+    result = %{
+      content: %{
+        type: "text",
+        text: text
+      },
+      isError: false
+    }
+
+    send_success(conn, result)
+  end
+
+  def send_error(%Plug.Conn{} = conn, message) do
+    result = %{
+      content: %{
+        type: "text",
+        text: message
+      },
+      isError: true
+    }
+
+    send_success(conn, result)
+  end
+
+  def send_success(%Plug.Conn{} = conn, result) do
+    request_id = conn.body_params["id"]
+    response = JsonRpc2.success_response(request_id, result)
+
+    Method.send_json(conn, response)
   end
 end

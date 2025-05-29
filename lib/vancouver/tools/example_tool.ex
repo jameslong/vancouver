@@ -23,7 +23,7 @@ defmodule Vancouver.Tools.ExampleTool do
     }
   end
 
-  def run(_conn, %{"example_param" => example_param}) do
-    {:ok, "Example tool executed successfully with param: #{example_param}"}
+  def run(conn, %{"example_param" => example_param}) do
+    send_text(conn, "Executing example tool with param: #{example_param}")
   end
 end
