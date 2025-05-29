@@ -1,8 +1,12 @@
-# WIP: Vancouver
+# Vancouver
 
-Helper library to make it quick and easy to add MCP server capability to your Phoenix/Bandit project. Vancouver handles initialization, request validation, and offers helper functions to simplify the creation of MCP tools. 
+> [!WARNING]
+>
+> This library is under active development - expect breaking changes
 
-Note, Vancouver is currently in-development, however, the dev UX will look something like this:
+Vancouver makes it easy to add [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) functionality to your Phoenix/Bandit server. Vancouver handles initialization, request validation, and offers helper functions to simplify the creation of MCP tools. 
+
+## Getting started
 
 ### 1. Add dependency
 
@@ -16,7 +20,7 @@ defp deps do
 end
 ```
 
-### 2. Add your tools
+### 2. Create your tools
 
 ```elixir
 defmodule MyProject.Tools.ExampleTool do
@@ -68,7 +72,7 @@ config :vancouver,
 In `router.ex`:
 
 ```elixir
-post("/mcp/v1", do: Vancouver.McpPipeline.call(conn, []))
+post("/mcp/v1", do: Vancouver.Plugs.Pipeline.call(conn))
 ```
 
 
