@@ -23,7 +23,7 @@ defmodule Vancouver.Tool do
 
   Should return {:ok, result} on success or {:error, message} on failure.
   """
-  @callback run(params :: map()) :: {:ok, any()} | {:error, String.t()}
+  @callback run(conn :: Plug.Conn.t(), params :: map()) :: {:ok, any()} | {:error, String.t()}
 
   defmacro __using__(_opts) do
     quote do

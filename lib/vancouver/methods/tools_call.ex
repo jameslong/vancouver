@@ -36,7 +36,7 @@ defmodule Vancouver.Methods.ToolsCall do
 
   defp call_tool(conn, request, tool, arguments) do
     result =
-      case tool.run(arguments) do
+      case tool.run(conn, arguments) do
         {:ok, result} -> tool_success_result(result)
         {:error, reason} -> tool_error_result(reason)
       end
