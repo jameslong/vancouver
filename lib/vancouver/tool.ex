@@ -46,6 +46,8 @@ defmodule Vancouver.Tool do
     end
   end
 
+  def send_json(%Plug.Conn{} = conn, data), do: send_text(conn, JSON.encode!(data))
+
   def send_text(%Plug.Conn{} = conn, text) when is_binary(text) do
     result = %{
       content: [
