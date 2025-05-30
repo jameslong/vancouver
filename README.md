@@ -37,7 +37,7 @@ defmodule MyApp.Tools.CalculateSum do
   end
 
   def run(conn, %{"a" => a, "b" => b}) do
-    send_text(conn, "\#{a + b}")
+    send_text(conn, "#{a + b}")
   end
 end
 ```
@@ -60,7 +60,7 @@ config :vancouver,
 In `router.ex`:
 
 ```elixir
-forward "/mcp/v1", Vancouver.Router
+forward "/mcp", Vancouver.Router
 ```
 
 ### 5. (Optional) Add to your MCP client
@@ -73,7 +73,7 @@ E.g. For Claude Desktop, you can modify your config `Settings -> Developer -> Ed
                 "command": "npx",
                 "args": [
                     "mcp-remote",
-                    "http://localhost:4000/mcp/v1"
+                    "http://localhost:4000/mcp"
                 ]
             }
         }
