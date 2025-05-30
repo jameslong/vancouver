@@ -1,7 +1,5 @@
 defmodule Vancouver.Methods.ToolsCall do
-  @moduledoc """
-  Handles the `tools/call` method for the MCP protocol.
-  """
+  @moduledoc false
 
   import Vancouver.Method
   alias Vancouver.JsonRpc2

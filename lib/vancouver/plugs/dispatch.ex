@@ -1,7 +1,5 @@
 defmodule Vancouver.Plugs.Dispatch do
-  @moduledoc """
-  Dispatches the incoming request to the relevant handler.
-  """
+  @moduledoc false
 
   alias Vancouver.Methods
 

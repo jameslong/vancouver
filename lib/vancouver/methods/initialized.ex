@@ -1,7 +1,5 @@
 defmodule Vancouver.Methods.Initialized do
-  @moduledoc """
-  Handles the `initialized` method for the MCP protocol.
-  """
+  @moduledoc false
 
   import Vancouver.Method
 

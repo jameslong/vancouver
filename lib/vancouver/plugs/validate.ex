@@ -1,7 +1,5 @@
 defmodule Vancouver.Plugs.Validate do
-  @moduledoc """
-  Validates that the request against the JSONRPCMessage schema.
-  """
+  @moduledoc false
 
   import Vancouver.Method
   import Plug.Conn

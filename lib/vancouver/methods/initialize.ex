@@ -1,7 +1,5 @@
 defmodule Vancouver.Methods.Initialize do
-  @moduledoc """
-  Handles the `initialize` method for the MCP protocol.
-  """
+  @moduledoc false
 
   import Vancouver.Method
   alias Vancouver.JsonRpc2
