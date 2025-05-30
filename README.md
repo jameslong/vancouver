@@ -1,9 +1,5 @@
 # Vancouver
 
-> [!WARNING]
->
-> This library is under active development - expect breaking changes
-
 Vancouver makes it easy to add [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) functionality to your Phoenix/Bandit server. Vancouver handles initialization, request validation, and offers helper functions to simplify the creation of MCP tools. 
 
 ## Getting started
@@ -46,7 +42,7 @@ defmodule MyApp.Tools.CalculateSum do
 end
 ```
 
-### 3. Update the config
+### 3. Add config
 
 In `config.ex`:
 
@@ -66,5 +62,48 @@ In `router.ex`:
 ```elixir
 post("/mcp/v1", do: Vancouver.Plugs.Pipeline.call(conn))
 ```
+
+### 5. (Optional) Add to your MCP client
+
+E.g. For Claude Desktop, you can modify your config `Settings -> Developer -> Edit config` as follows:
+
+    {
+        "mcpServers": {
+            "MyApp": {
+                "command": "npx",
+                "args": [
+                    "mcp-remote",
+                    "http://localhost:4000/mcp/v1"
+                ]
+            }
+        }
+    }
+
+Run your server, and restart Claude to starting using your MCP tools. 🚀
+
+## FAQ
+
+### Does Vancouver support all parts of the Model Context Protocol specification?
+
+Not yet. Vancouver currently supports:
+
+- streamable HTTP transport
+- tools
+- sync responses (no streaming)
+- single messages (no batching)
+
+However, the library is simple enough that you should be able to modify it for your needs.
+
+For more info on the protocol itself, see the [MCP User Guide](https://modelcontextprotocol.io/introduction).
+
+### Is Vancouver stable / ready for production?
+
+No. This library is in early development. Expect breaking changes.
+
+### Why is this library called Vancouver?
+
+Vancouver is the natural home of MCP (Mountain, Coffee, and Phoenix).
+
+
 
 
