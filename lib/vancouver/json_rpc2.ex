@@ -1,7 +1,5 @@
 defmodule Vancouver.JsonRpc2 do
-  @moduledoc """
-  Provides helper functions to create JSON-RPC 2.0 responses.
-  """
+  @moduledoc false
 
   @error_type_map %{
     parse_error: {-32700, "Parse error"},

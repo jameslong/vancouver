@@ -1,7 +1,5 @@
 defmodule Vancouver.Methods.Unknown do
-  @moduledoc """
-  Handles unsupported method calls.
-  """
+  @moduledoc false
 
   import Vancouver.Method
   alias Vancouver.JsonRpc2

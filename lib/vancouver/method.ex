@@ -1,7 +1,5 @@
 defmodule Vancouver.Method do
-  @moduledoc """
-  Provides helper functions for methods.
-  """
+  @moduledoc false
 
   import Plug.Conn
 

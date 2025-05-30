@@ -1,7 +1,5 @@
 defmodule Vancouver.Methods.ToolsList do
-  @moduledoc """
-  Handles the `tools/list` method for the MCP protocol.
-  """
+  @moduledoc false
 
   import Vancouver.Method
   alias Vancouver.JsonRpc2

@@ -1,7 +1,5 @@
 defmodule Vancouver.Plugs.Pipeline do
-  @moduledoc """
-  Pipline for plugs for handling MCP requests.
-  """
+  @moduledoc false
 
   use Plug.Builder
   alias Vancouver.Plugs

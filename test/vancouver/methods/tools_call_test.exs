@@ -6,8 +6,8 @@ defmodule Vancouver.Methods.ToolsCallTest do
 
   describe "run/2" do
     test "with valid tool returns success response" do
-      tools = [Vancouver.Tools.ExampleTool]
-      request = tools_call_request("example_tool", %{"example_param" => "a param"})
+      tools = [Vancouver.Tools.CalculateSum]
+      request = tools_call_request("calculate_sum", %{"a" => 1, "b" => 2})
 
       conn =
         request
@@ -18,8 +18,8 @@ defmodule Vancouver.Methods.ToolsCallTest do
     end
 
     test "with invalid arguments returns error response" do
-      tools = [Vancouver.Tools.ExampleTool]
-      request = tools_call_request("example_tool", %{"invalid_param" => "a param"})
+      tools = [Vancouver.Tools.CalculateSum]
+      request = tools_call_request("calculate_sum", %{"a" => 1})
 
       conn =
         request
@@ -30,7 +30,7 @@ defmodule Vancouver.Methods.ToolsCallTest do
     end
 
     test "with tool not found returns error response" do
-      tools = [Vancouver.Tools.ExampleTool]
+      tools = [Vancouver.Tools.CalculateSum]
       request = tools_call_request("invalid_tool", %{})
 
       conn =
