@@ -10,7 +10,8 @@ defmodule Vancouver.MixProject do
       package: package(),
       deps: deps(),
       name: "Vancouver",
-      source_url: "https://github.com/jameslong/vancouver"
+      source_url: "https://github.com/jameslong/vancouver",
+      docs: &docs/0
     ]
   end
 
@@ -24,6 +25,7 @@ defmodule Vancouver.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:ex_doc, "~> 0.38", only: :dev, runtime: false},
       {:ex_json_schema, "~> 0.11.0"},
       {:plug, "~> 1.15"}
     ]
@@ -39,6 +41,13 @@ defmodule Vancouver.MixProject do
       licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/jameslong/vancouver"},
       files: ~w(lib priv mix.exs README.md LICENSE)
+    ]
+  end
+
+  defp docs do
+    [
+      main: "readme",
+      extras: ["README.md"]
     ]
   end
 end
