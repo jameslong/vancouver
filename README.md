@@ -23,33 +23,25 @@ end
 ### 2. Create your tools
 
 ```elixir
-defmodule MyProject.Tools.ExampleTool do
-  @moduledoc """
-  Implements the `ExampleTool` tool.
-  """
-
+defmodule MyApp.Tools.CalculateSum do
   use Vancouver.Tool
 
-  def name, do: "example_tool"
-  def description, do: "An example tool for demonstration purposes"
+  def name, do: "calculate_sum"
+  def description, do: "Add two numbers together"
 
   def input_schema do
     %{
       "type" => "object",
-      "description" => "Input parameters for the example tool",
       "properties" => %{
-        "example_param" => %{
-          "type" => "string",
-          "description" => "An example parameter for the tool"
-        }
+        "a" => %{"type" => "number"},
+        "b" => %{"type" => "number"}
       },
-      "required" => ["example_param"],
-      "additionalProperties" => false
+      "required" => ["a", "b"]
     }
   end
 
-  def run(conn, %{"example_param" => example_param}) do
-    send_text(conn, "Example tool executed successfully with param: #{example_param}")
+  def run(conn, %{"a" => a, "b" => b}) do
+    send_text(conn, "\#{a + b}")
   end
 end
 ```
@@ -63,7 +55,7 @@ config :vancouver,
   name: "My MCP Server",
   version: "1.0.0",
   tools: [
-    MyProject.Tools.ExampleTool
+    MyApp.Tools.CalculateSum
   ]
 ```
 
