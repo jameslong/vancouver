@@ -11,7 +11,7 @@ In `mix.exs`:
 ```elixir
 defp deps do
   [
-    {:vancouver, "~> 0.1.0"}
+    {:vancouver, "~> 0.1"}
   ]
 end
 ```
@@ -103,7 +103,3 @@ No. This library is in early development. Expect breaking changes.
 ### Why is this library called Vancouver?
 
 Vancouver is the natural home of MCP (Mountain, Coffee, and Phoenix).
-
-
-
-
