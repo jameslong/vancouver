@@ -60,7 +60,7 @@ config :vancouver,
 In `router.ex`:
 
 ```elixir
-post("/mcp/v1", do: Vancouver.Plugs.Pipeline.call(conn))
+forward "/mcp/v1", Vancouver.Router
 ```
 
 ### 5. (Optional) Add to your MCP client
