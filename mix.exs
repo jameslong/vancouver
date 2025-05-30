@@ -26,7 +26,7 @@ defmodule Vancouver.MixProject do
   defp deps do
     [
       {:ex_doc, "~> 0.38", only: :dev, runtime: false},
-      {:ex_json_schema, "~> 0.11.0"},
+      {:ex_json_schema, "~> 0.11"},
       {:plug, "~> 1.15"}
     ]
   end
