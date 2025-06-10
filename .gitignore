@@ -23,3 +23,6 @@ vancouver-*.tar
 /tmp/
 
 .DS_Store
+
+# VSCode config
+launch.json
