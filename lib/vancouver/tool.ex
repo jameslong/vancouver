@@ -80,6 +80,29 @@ defmodule Vancouver.Tool do
   end
 
   @doc """
+  Sends an error response.
+
+  ## Examples
+
+      iex> send_error(conn, "an error occurred")
+
+  """
+  @spec send_error(Plug.Conn.t(), binary()) :: Plug.Conn.t()
+  def send_error(%Plug.Conn{} = conn, message) do
+    result = %{
+      content: [
+        %{
+          type: "text",
+          text: message
+        }
+      ],
+      isError: true
+    }
+
+    send_success(conn, result)
+  end
+
+  @doc """
   Sends JSON response.
 
   ## Examples
@@ -108,29 +131,6 @@ defmodule Vancouver.Tool do
         }
       ],
       isError: false
-    }
-
-    send_success(conn, result)
-  end
-
-  @doc """
-  Sends an error response.
-
-  ## Examples
-
-      iex> send_error(conn, "an error occurred")
-
-  """
-  @spec send_error(Plug.Conn.t(), binary()) :: Plug.Conn.t()
-  def send_error(%Plug.Conn{} = conn, message) do
-    result = %{
-      content: [
-        %{
-          type: "text",
-          text: message
-        }
-      ],
-      isError: true
     }
 
     send_success(conn, result)
