@@ -80,6 +80,79 @@ defmodule Vancouver.Tool do
   end
 
   @doc """
+  Sends audio response.
+
+  ## Examples
+
+      iex> send_audio(conn, "base64-encoded-audio-data", "audio/wav")
+
+  """
+  @spec send_audio(Plug.Conn.t(), binary(), binary()) :: Plug.Conn.t()
+  def send_audio(%Plug.Conn{} = conn, base64_data, mime_type)
+      when is_binary(base64_data) and is_binary(mime_type) do
+    result = %{
+      content: [
+        %{
+          type: "audio",
+          data: base64_data,
+          mimeType: mime_type
+        }
+      ],
+      isError: false
+    }
+
+    send_success(conn, result)
+  end
+
+  @doc """
+  Sends an error response.
+
+  ## Examples
+
+      iex> send_error(conn, "an error occurred")
+
+  """
+  @spec send_error(Plug.Conn.t(), binary()) :: Plug.Conn.t()
+  def send_error(%Plug.Conn{} = conn, message) do
+    result = %{
+      content: [
+        %{
+          type: "text",
+          text: message
+        }
+      ],
+      isError: true
+    }
+
+    send_success(conn, result)
+  end
+
+  @doc """
+  Sends image response.
+
+  ## Examples
+
+      iex> send_image(conn, "base64-encoded-data", "image/png")
+
+  """
+  @spec send_image(Plug.Conn.t(), binary(), binary()) :: Plug.Conn.t()
+  def send_image(%Plug.Conn{} = conn, base64_data, mime_type)
+      when is_binary(base64_data) and is_binary(mime_type) do
+    result = %{
+      content: [
+        %{
+          type: "image",
+          data: base64_data,
+          mimeType: mime_type
+        }
+      ],
+      isError: false
+    }
+
+    send_success(conn, result)
+  end
+
+  @doc """
   Sends JSON response.
 
   ## Examples
@@ -108,29 +181,6 @@ defmodule Vancouver.Tool do
         }
       ],
       isError: false
-    }
-
-    send_success(conn, result)
-  end
-
-  @doc """
-  Sends an error response.
-
-  ## Examples
-
-      iex> send_error(conn, "an error occurred")
-
-  """
-  @spec send_error(Plug.Conn.t(), binary()) :: Plug.Conn.t()
-  def send_error(%Plug.Conn{} = conn, message) do
-    result = %{
-      content: [
-        %{
-          type: "text",
-          text: message
-        }
-      ],
-      isError: true
     }
 
     send_success(conn, result)
