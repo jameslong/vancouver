@@ -103,6 +103,31 @@ defmodule Vancouver.Tool do
   end
 
   @doc """
+  Sends image response.
+
+  ## Examples
+
+      iex> send_image(conn, "base64-encoded-data", "image/png")
+
+  """
+  @spec send_image(Plug.Conn.t(), binary(), binary()) :: Plug.Conn.t()
+  def send_image(%Plug.Conn{} = conn, base64_data, mime_type)
+      when is_binary(base64_data) and is_binary(mime_type) do
+    result = %{
+      content: [
+        %{
+          type: "image",
+          data: base64_data,
+          mimeType: mime_type
+        }
+      ],
+      isError: false
+    }
+
+    send_success(conn, result)
+  end
+
+  @doc """
   Sends JSON response.
 
   ## Examples
