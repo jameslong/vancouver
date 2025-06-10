@@ -80,6 +80,31 @@ defmodule Vancouver.Tool do
   end
 
   @doc """
+  Sends audio response.
+
+  ## Examples
+
+      iex> send_audio(conn, "base64-encoded-audio-data", "audio/wav")
+
+  """
+  @spec send_audio(Plug.Conn.t(), binary(), binary()) :: Plug.Conn.t()
+  def send_audio(%Plug.Conn{} = conn, base64_data, mime_type)
+      when is_binary(base64_data) and is_binary(mime_type) do
+    result = %{
+      content: [
+        %{
+          type: "audio",
+          data: base64_data,
+          mimeType: mime_type
+        }
+      ],
+      isError: false
+    }
+
+    send_success(conn, result)
+  end
+
+  @doc """
   Sends an error response.
 
   ## Examples
