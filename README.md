@@ -1,3 +1,8 @@
+[![Hex.pm](https://img.shields.io/hexpm/v/vancouver.svg)](https://hex.pm/packages/vancouver)
+[![Hexdocs.pm](https://img.shields.io/badge/hex-docs-lightgreen.svg)](https://hexdocs.pm/vancouver/)
+[![Hex.pm](https://img.shields.io/hexpm/dt/vancouver.svg)](https://hex.pm/packages/vancouver)
+[![Hex.pm](https://img.shields.io/hexpm/dw/vancouver.svg)](https://hex.pm/packages/vancouver)
+
 # Vancouver
 
 Vancouver makes it easy to add [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) functionality to your Phoenix/Bandit server. Vancouver handles initialization, request validation, and offers helper functions to simplify the creation of MCP tools. 
