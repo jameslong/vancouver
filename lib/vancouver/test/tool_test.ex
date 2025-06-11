@@ -3,6 +3,14 @@ defmodule Vancouver.ToolTest do
   Conveniences for testing Vancouver tools.
   """
 
+  @doc """
+  Creates a JSON-RPC call request for a tool.
+
+  ## Examples
+
+      body = call_request("calculate_sum", %{"a" => 1, "b" => 2})
+
+  """
   @spec call_request(String.t(), map(), String.t()) :: map()
   def call_request(tool_name, arguments, id \\ "1") do
     %{
@@ -16,6 +24,16 @@ defmodule Vancouver.ToolTest do
     }
   end
 
+  @doc """
+  Asserts that the response was successful, and that audio content was returned.
+
+  ## Examples
+
+      content = audio_response(conn)
+      assert content["data"] == "base64-audio-data"
+      assert content["mimeType"] == "audio/wav"
+
+  """
   @spec audio_response(Plug.Conn.t()) :: %{data: String.t(), mimeType: String.t()}
   def audio_response(conn) do
     response = JSON.decode!(conn.resp_body)
@@ -26,6 +44,14 @@ defmodule Vancouver.ToolTest do
     |> get_content()
   end
 
+  @doc """
+  Asserts that the response was an error, and returns the error text.
+
+  ## Examples
+
+      assert error_response(conn) == "An error occurred"
+
+  """
   @spec error_response(Plug.Conn.t()) :: String.t()
   def error_response(conn) do
     response = JSON.decode!(conn.resp_body)
@@ -36,6 +62,16 @@ defmodule Vancouver.ToolTest do
     |> get_text()
   end
 
+  @doc """
+  Asserts that the response was successful, and that image content was returned.
+
+  ## Examples
+
+      content = image_response(conn)
+      assert content["data"] == "base64-image-data"
+      assert content["mimeType"] == "image/png"
+
+  """
   @spec image_response(Plug.Conn.t()) :: %{data: String.t(), mimeType: String.t()}
   def image_response(conn) do
     response = JSON.decode!(conn.resp_body)
@@ -46,6 +82,14 @@ defmodule Vancouver.ToolTest do
     |> get_content()
   end
 
+  @doc """
+  Asserts that the response was successful, and that JSON content was returned.
+
+  ## Examples
+
+      assert json_response(conn) == %{"key" => "value"}
+
+  """
   @spec json_response(Plug.Conn.t()) :: term()
   def json_response(conn) do
     response = JSON.decode!(conn.resp_body)
@@ -56,6 +100,14 @@ defmodule Vancouver.ToolTest do
     |> get_json()
   end
 
+  @doc """
+  Asserts that the response was successful, and that text content was returned.
+
+  ## Examples
+
+      assert text_response(conn) == "Hello, world!"
+
+  """
   @spec text_response(Plug.Conn.t()) :: String.t()
   def text_response(conn) do
     response = JSON.decode!(conn.resp_body)
