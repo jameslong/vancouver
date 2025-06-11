@@ -1,18 +1,14 @@
 defmodule Vancouver.Tools.CalculateSumTest do
-  use ExUnit.Case, async: false
+  use ExUnit.Case, async: true
 
   import Plug.Conn
   import Plug.Test
 
+  alias Vancouver.Plugs.Pipeline
   alias Vancouver.Tools.CalculateSum
   alias Vancouver.ToolTest
 
   describe "run/2" do
-    setup do
-      Application.put_env(:vancouver, :tools, [CalculateSum])
-      :ok
-    end
-
     test "with argunments returns success" do
       conn = build_conn("calculate_sum", %{"a" => 1, "b" => 2})
       assert ToolTest.text_response(conn) == "3"
@@ -25,6 +21,6 @@ defmodule Vancouver.Tools.CalculateSumTest do
     :post
     |> conn("/", JSON.encode!(body))
     |> put_req_header("content-type", "application/json")
-    |> Vancouver.Router.call(Vancouver.Router.init([]))
+    |> Pipeline.call(tools: [CalculateSum])
   end
 end

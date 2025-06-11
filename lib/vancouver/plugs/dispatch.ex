@@ -8,7 +8,7 @@ defmodule Vancouver.Plugs.Dispatch do
   def call(%Plug.Conn{} = conn, _opts) do
     request = conn.body_params
     method = request["method"]
-    tools = Application.get_env(:vancouver, :tools, [])
+    tools = conn.assigns[:vancouver][:tools] || []
 
     case method do
       "initialize" -> Methods.Initialize.run(conn)

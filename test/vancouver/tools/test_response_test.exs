@@ -1,18 +1,14 @@
 defmodule Vancouver.Tools.TestResponseTest do
-  use ExUnit.Case, async: false
+  use ExUnit.Case, async: true
 
   import Plug.Conn
   import Plug.Test
 
+  alias Vancouver.Plugs.Pipeline
   alias Vancouver.Tools.TestResponse
   alias Vancouver.ToolTest
 
   describe "run/2" do
-    setup do
-      Application.put_env(:vancouver, :tools, [TestResponse])
-      :ok
-    end
-
     test "with audio response type returns success" do
       conn = build_conn("test_response", %{"response_type" => "audio"})
 
@@ -51,6 +47,6 @@ defmodule Vancouver.Tools.TestResponseTest do
     :post
     |> conn("/", JSON.encode!(body))
     |> put_req_header("content-type", "application/json")
-    |> Vancouver.Router.call(Vancouver.Router.init([]))
+    |> Pipeline.call(tools: [TestResponse])
   end
 end

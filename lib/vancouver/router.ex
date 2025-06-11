@@ -8,11 +8,5 @@ defmodule Vancouver.Router do
   plug(:match)
   plug(:dispatch)
 
-  post "/" do
-    Pipeline.call(conn, Pipeline.init([]))
-  end
-
-  match _ do
-    send_resp(conn, 404, "Not found")
-  end
+  forward("/", to: Pipeline)
 end
