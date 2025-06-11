@@ -49,10 +49,7 @@ In `config.ex`:
 ```elixir
 config :vancouver,
   name: "My MCP Server",
-  version: "1.0.0",
-  tools: [
-    MyApp.Tools.CalculateSum
-  ]
+  version: "1.0.0"
 ```
 
 ### 4. Add your MCP route
@@ -60,7 +57,7 @@ config :vancouver,
 In `router.ex`:
 
 ```elixir
-forward "/mcp", Vancouver.Router
+forward "/mcp", Vancouver.Router, tools: [MyApp.Tools.CalculateSum]
 ```
 
 ### 5. (Optional) Add to your MCP client
