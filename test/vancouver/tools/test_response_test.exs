@@ -4,7 +4,7 @@ defmodule Vancouver.Tools.TestResponseTest do
   import Plug.Conn
   import Plug.Test
 
-  alias Vancouver.Plugs.Pipeline
+  alias Vancouver.Router
   alias Vancouver.Tools.TestResponse
   alias Vancouver.ToolTest
 
@@ -47,6 +47,6 @@ defmodule Vancouver.Tools.TestResponseTest do
     :post
     |> conn("/", JSON.encode!(body))
     |> put_req_header("content-type", "application/json")
-    |> Pipeline.call(tools: [TestResponse])
+    |> Router.call(tools: [TestResponse])
   end
 end

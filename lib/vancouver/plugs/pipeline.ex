@@ -1,7 +1,7 @@
 defmodule Vancouver.Plugs.Pipeline do
   @moduledoc false
 
-  use Plug.Builder, copy_opts_to_assign: :vancouver
+  use Plug.Builder
 
   alias Vancouver.Plugs
 

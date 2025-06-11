@@ -4,7 +4,7 @@ defmodule Vancouver.Tools.CalculateSumTest do
   import Plug.Conn
   import Plug.Test
 
-  alias Vancouver.Plugs.Pipeline
+  alias Vancouver.Router
   alias Vancouver.Tools.CalculateSum
   alias Vancouver.ToolTest
 
@@ -21,6 +21,6 @@ defmodule Vancouver.Tools.CalculateSumTest do
     :post
     |> conn("/", JSON.encode!(body))
     |> put_req_header("content-type", "application/json")
-    |> Pipeline.call(tools: [CalculateSum])
+    |> Router.call(tools: [CalculateSum])
   end
 end
