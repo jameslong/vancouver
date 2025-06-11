@@ -9,7 +9,7 @@ defmodule Vancouver.Tools.CalculateSumTest do
   alias Vancouver.ToolTest
 
   describe "run/2" do
-    test "with argunments returns success" do
+    test "with arguments returns success" do
       conn = build_conn("calculate_sum", %{"a" => 1, "b" => 2})
       assert ToolTest.text_response(conn) == "3"
     end
