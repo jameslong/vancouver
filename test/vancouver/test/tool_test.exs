@@ -11,11 +11,10 @@ defmodule Vancouver.Test.ToolTest do
     test "creates a valid call request" do
       tool_name = "test_tool"
       arguments = %{"arg1" => "value1", "arg2" => "value2"}
-      id = "123"
 
-      assert ToolTest.call_request(tool_name, arguments, id) == %{
+      assert ToolTest.call_request(tool_name, arguments) == %{
                "jsonrpc" => "2.0",
-               "id" => id,
+               "id" => 1,
                "method" => "tools/call",
                "params" => %{
                  "name" => tool_name,

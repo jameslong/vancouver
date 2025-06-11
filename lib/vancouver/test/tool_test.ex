@@ -4,18 +4,18 @@ defmodule Vancouver.ToolTest do
   """
 
   @doc """
-  Creates a JSON-RPC call request for a tool.
+  Creates a valid request body for a tool call request.
 
   ## Examples
 
       body = call_request("calculate_sum", %{"a" => 1, "b" => 2})
 
   """
-  @spec call_request(String.t(), map(), String.t()) :: map()
-  def call_request(tool_name, arguments, id \\ "1") do
+  @spec call_request(String.t(), map()) :: map()
+  def call_request(tool_name, arguments) do
     %{
       "jsonrpc" => "2.0",
-      "id" => id,
+      "id" => 1,
       "method" => "tools/call",
       "params" => %{
         "name" => tool_name,
