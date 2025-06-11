@@ -3,6 +3,7 @@ defmodule Vancouver.ToolTest do
   Conveniences for testing Vancouver tools.
   """
 
+  @spec call_request(String.t(), map(), String.t()) :: map()
   def call_request(tool_name, arguments, id \\ "1") do
     %{
       "jsonrpc" => "2.0",
@@ -15,6 +16,7 @@ defmodule Vancouver.ToolTest do
     }
   end
 
+  @spec audio_response(Plug.Conn.t()) :: %{data: String.t(), mimeType: String.t()}
   def audio_response(conn) do
     response = JSON.decode!(conn.resp_body)
 
@@ -24,6 +26,7 @@ defmodule Vancouver.ToolTest do
     |> get_content()
   end
 
+  @spec error_response(Plug.Conn.t()) :: String.t()
   def error_response(conn) do
     response = JSON.decode!(conn.resp_body)
 
@@ -33,6 +36,7 @@ defmodule Vancouver.ToolTest do
     |> get_text()
   end
 
+  @spec image_response(Plug.Conn.t()) :: %{data: String.t(), mimeType: String.t()}
   def image_response(conn) do
     response = JSON.decode!(conn.resp_body)
 
@@ -42,6 +46,7 @@ defmodule Vancouver.ToolTest do
     |> get_content()
   end
 
+  @spec json_response(Plug.Conn.t()) :: term()
   def json_response(conn) do
     response = JSON.decode!(conn.resp_body)
 
@@ -51,6 +56,7 @@ defmodule Vancouver.ToolTest do
     |> get_json()
   end
 
+  @spec text_response(Plug.Conn.t()) :: String.t()
   def text_response(conn) do
     response = JSON.decode!(conn.resp_body)
 
