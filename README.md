@@ -1,3 +1,4 @@
+[![CI](https://github.com/jameslong/vancouver/actions/workflows/test.yml/badge.svg)](https://github.com/jameslong/vancouver/actions/workflows/test.yml)
 [![Hex.pm](https://img.shields.io/hexpm/v/vancouver.svg)](https://hex.pm/packages/vancouver)
 [![Hexdocs.pm](https://img.shields.io/badge/hex-docs-lightgreen.svg)](https://hexdocs.pm/vancouver/)
 [![Hex.pm](https://img.shields.io/hexpm/dt/vancouver.svg)](https://hex.pm/packages/vancouver)
