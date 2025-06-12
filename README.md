@@ -17,7 +17,7 @@ In `mix.exs`:
 ```elixir
 defp deps do
   [
-    {:vancouver, "~> 0.1"}
+    {:vancouver, "~> 0.2"}
   ]
 end
 ```
