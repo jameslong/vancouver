@@ -10,7 +10,7 @@ defmodule Vancouver.Methods.Initialize do
     version = Application.get_env(:vancouver, :version, "1.0.0")
 
     result = %{
-      "capabilities" => %{"tools" => %{}},
+      "capabilities" => %{"prompts" => %{}, "tools" => %{}},
       "protocolVersion" => "2024-11-05",
       "serverInfo" => %{
         "name" => name,

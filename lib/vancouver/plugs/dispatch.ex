@@ -14,6 +14,7 @@ defmodule Vancouver.Plugs.Dispatch do
       "initialize" -> Methods.Initialize.run(conn)
       "notifications/initialized" -> Methods.Initialized.run(conn)
       "ping" -> Methods.Ping.run(conn)
+      "prompts/list" -> Methods.PromptsList.run(conn)
       "tools/list" -> Methods.ToolsList.run(conn, tools)
       "tools/call" -> Methods.ToolsCall.run(conn, tools)
       _ -> Methods.Unknown.run(conn)
