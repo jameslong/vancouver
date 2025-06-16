@@ -74,6 +74,41 @@ defmodule Vancouver.Prompt do
   end
 
   @doc """
+  Sends image response.
+
+  Accepts a `:role` option, which can be either `:user` or `:assistant`, defaulting to `:user`.
+
+  ## Examples
+
+      iex> send_image(conn, "base64-encoded-data", "image/png")
+
+      iex> send_image(conn, "base64-encoded-data", "image/png", role: :user)
+
+      iex> send_image(conn, "base64-encoded-data", "image/png", role: :assistant)
+
+  """
+  @spec send_image(Plug.Conn.t(), binary(), binary(), Keyword.t()) :: Plug.Conn.t()
+  def send_image(%Plug.Conn{} = conn, base64_data, mime_type, opts \\ [])
+      when is_binary(base64_data) and is_binary(mime_type) do
+    role = get_role(opts)
+
+    result = %{
+      "messages" => [
+        %{
+          "role" => role,
+          "content" => %{
+            "type" => "image",
+            "data" => base64_data,
+            "mimeType" => mime_type
+          }
+        }
+      ]
+    }
+
+    send_success(conn, result)
+  end
+
+  @doc """
   Sends text response.
 
   Accepts a `:role` option, which can be either `:user` or `:assistant`, defaulting to `:user`.
