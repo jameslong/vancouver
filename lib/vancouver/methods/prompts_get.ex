@@ -26,35 +26,10 @@ defmodule Vancouver.Methods.PromptsGet do
   end
 
   defp validate_arguments(prompt, arguments) do
-    schema = build_schema(prompt.arguments())
-
-    case JsonRpc2.validate_schema(schema, arguments) do
+    case JsonRpc2.validate_schema(prompt.input_schema(), arguments) do
       :ok -> :ok
       {:error, reason} -> {:error, {:invalid_params, reason}}
     end
-  end
-
-  defp build_schema(arguments) do
-    properties =
-      arguments
-      |> Enum.map(fn argument ->
-        {
-          argument["name"],
-          %{"type" => "string", "description" => argument["description"]}
-        }
-      end)
-      |> Enum.into(%{})
-
-    required =
-      arguments
-      |> Enum.filter(& &1["required"])
-      |> Enum.map(& &1["name"])
-
-    %{
-      "type" => "object",
-      "properties" => properties,
-      "required" => required
-    }
   end
 
   defp prompt_not_found(conn, request) do

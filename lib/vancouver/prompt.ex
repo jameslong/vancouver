@@ -35,6 +35,26 @@ defmodule Vancouver.Prompt do
           "arguments" => arguments()
         }
       end
+
+      def input_schema do
+        arguments = arguments()
+
+        properties =
+          arguments
+          |> Enum.map(&{&1["name"], %{"type" => "string", "description" => &1["description"]}})
+          |> Enum.into(%{})
+
+        required =
+          arguments
+          |> Enum.filter(& &1["required"])
+          |> Enum.map(& &1["name"])
+
+        %{
+          "type" => "object",
+          "properties" => properties,
+          "required" => required
+        }
+      end
     end
   end
 
