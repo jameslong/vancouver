@@ -41,12 +41,18 @@ defmodule Vancouver.Prompt do
   @doc """
   Sends text response.
 
+  Accepts a `:role` option, which can be either `:user` or `:assistant`, defaulting to `:user`.
+
   ## Examples
 
-      iex> send_text(conn, :user, "hello")
+      iex> send_text(conn, "hello")
+
+      iex> send_text(conn, "hello", role: :user)
+
+      iex> send_text(conn, "hello", role: :assistant)
 
   """
-  @spec send_text(Plug.Conn.t(), role(), binary()) :: Plug.Conn.t()
+  @spec send_text(Plug.Conn.t(), binary(), Keyword.t()) :: Plug.Conn.t()
   def send_text(%Plug.Conn{} = conn, text, opts \\ []) when is_binary(text) do
     role =
       case Keyword.get(opts, :role, :user) do
