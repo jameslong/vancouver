@@ -26,3 +26,4 @@ vancouver-*.tar
 
 # VSCode config
 launch.json
+mcp.json
