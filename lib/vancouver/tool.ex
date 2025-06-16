@@ -33,6 +33,8 @@ defmodule Vancouver.Tool do
   Tools provide helper functions to send valid MCP responses:
 
   - `send_json/2` - sends a JSON response
+  - `send_audio/3` - sends an audio response
+  - `send_image/3` - sends an image response
   - `send_text/2` - sends a text response
   - `send_error/2` - sends an error response
   """
