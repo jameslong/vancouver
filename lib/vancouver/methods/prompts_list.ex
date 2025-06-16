@@ -4,9 +4,10 @@ defmodule Vancouver.Methods.PromptsList do
   import Vancouver.Method
   alias Vancouver.JsonRpc2
 
-  def run(%Plug.Conn{} = conn, prompts \\ []) do
+  def run(%Plug.Conn{} = conn, prompts) do
     request = conn.body_params
-    response = JsonRpc2.success_response(request["id"], %{prompts: prompts})
+    prompt_definitions = Enum.map(prompts, & &1.definition())
+    response = JsonRpc2.success_response(request["id"], %{prompts: prompt_definitions})
 
     send_json(conn, response)
   end
