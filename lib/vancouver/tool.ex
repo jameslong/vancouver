@@ -72,10 +72,6 @@ defmodule Vancouver.Tool do
           "inputSchema" => input_schema()
         }
       end
-
-      def validate_arguments(arguments) do
-        Vancouver.JsonRpc2.validate_schema(input_schema(), arguments)
-      end
     end
   end
 
