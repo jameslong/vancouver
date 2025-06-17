@@ -6,7 +6,7 @@
 
 # Vancouver
 
-Vancouver makes it easy to add [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) functionality to your Phoenix/Bandit server. Vancouver handles initialization, request validation, and offers helper functions to simplify the creation of MCP tools. 
+Vancouver makes it easy to add [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) functionality to your Phoenix/Bandit server. Vancouver handles initialization, request validation, and offers helper functions to simplify the creation of MCP tools and prompts. 
 
 ## Getting started
 
@@ -17,12 +17,14 @@ In `mix.exs`:
 ```elixir
 defp deps do
   [
-    {:vancouver, "~> 0.2"}
+    {:vancouver, "~> 0.3"}
   ]
 end
 ```
 
-### 2. Create your tools
+### 2. Create your tools/prompts
+
+You can implement tools like this:
 
 ```elixir
 defmodule MyApp.Tools.CalculateSum do
@@ -48,6 +50,32 @@ defmodule MyApp.Tools.CalculateSum do
 end
 ```
 
+And prompts like this:
+
+```elixir
+defmodule MyApp.Prompts.CodeReview do
+  use Vancouver.Prompt
+
+  def name, do: "code_review"
+  def description, do: "Asks the LLM to analyze code quality and suggest improvements"
+
+  def arguments do
+    [
+      %{
+        "name" => "code",
+        "description" => "The code to review",
+        "required" => true
+      }
+    ]
+  end
+
+  def run(conn, %{"code" => code}) do
+    send_text(conn, "Please review this code: #{code}")
+  end
+end
+```
+
+
 ### 3. Add config
 
 In `config.ex`:
@@ -63,7 +91,9 @@ config :vancouver,
 In `router.ex`:
 
 ```elixir
-forward "/mcp", Vancouver.Router, tools: [MyApp.Tools.CalculateSum]
+forward "/mcp", Vancouver.Router, 
+  tools: [MyApp.Tools.CalculateSum],
+  prompts: [MyApp.Prompts.CodeReview]
 ```
 
 ### 5. (Optional) Add to your MCP client
@@ -90,10 +120,9 @@ Run your server, and restart Claude to starting using your MCP tools. 🚀
 
 Not yet. Vancouver currently supports:
 
-- streamable HTTP transport
 - tools
+- prompts
 - sync responses (no streaming)
-- single messages (no batching)
 
 However, the library is simple enough that you should be able to modify it for your needs.
 
