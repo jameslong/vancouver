@@ -199,9 +199,15 @@ defmodule Vancouver.Prompt do
 
   defp get_role(opts) do
     case Keyword.get(opts, :role, :user) do
-      :user -> "user"
-      :assistant -> "assistant"
-      _ -> raise ArgumentError, "Invalid role: #{inspect(opts[:role])}"
+      :user ->
+        "user"
+
+      :assistant ->
+        "assistant"
+
+      _ ->
+        raise ArgumentError,
+              "expected role to be one of [\"user\", \"assistant\"], got: #{inspect(opts[:role])}"
     end
   end
 
