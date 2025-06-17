@@ -7,7 +7,7 @@ defmodule Vancouver.Test.PromptTest do
   alias Vancouver.JsonRpc2
   alias Vancouver.PromptTest
 
-  describe "build_request/3" do
+  describe "build_request/2" do
     test "creates a valid get request" do
       prompt_name = "test_prompt"
       arguments = %{"arg1" => "value1", "arg2" => "value2"}

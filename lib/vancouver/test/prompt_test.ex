@@ -13,7 +13,7 @@ defmodule Vancouver.PromptTest do
       assert content["mimeType"] == "audio/wav"
 
   """
-  @spec audio_response(Plug.Conn.t()) :: %{data: String.t(), mimeType: String.t()}
+  @spec audio_response(Plug.Conn.t()) :: map()
   def audio_response(conn) do
     response = JSON.decode!(conn.resp_body)
 
@@ -73,7 +73,7 @@ defmodule Vancouver.PromptTest do
       assert content["mimeType"] == "image/png"
 
   """
-  @spec image_response(Plug.Conn.t()) :: %{data: String.t(), mimeType: String.t()}
+  @spec image_response(Plug.Conn.t()) :: map()
   def image_response(conn) do
     response = JSON.decode!(conn.resp_body)
 
