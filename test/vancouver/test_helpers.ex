@@ -66,6 +66,13 @@ defmodule Vancouver.TestHelpers do
     |> Map.put(:body_params, body)
   end
 
+  def result(conn) do
+    case JSON.decode!(conn.resp_body) do
+      %{"result" => result} -> result
+      _ -> raise "expected response to contain 'result' key, got: #{inspect(conn.resp_body)}"
+    end
+  end
+
   def assert_success(conn) do
     assert conn.status == 200
     assert conn.halted
