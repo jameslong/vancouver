@@ -44,6 +44,10 @@ defmodule Vancouver.TestHelpers do
     request("prompts/list", %{}, id)
   end
 
+  def prompts_get_request(prompt_name, arguments, id \\ 1) do
+    request("prompts/get", %{"name" => prompt_name, "arguments" => arguments}, id)
+  end
+
   def tools_list_request(id \\ 1) do
     request("tools/list", %{}, id)
   end
