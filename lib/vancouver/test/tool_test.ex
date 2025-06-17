@@ -4,27 +4,6 @@ defmodule Vancouver.ToolTest do
   """
 
   @doc """
-  Creates a valid request body for a tool call request.
-
-  ## Examples
-
-      body = call_request("calculate_sum", %{"a" => 1, "b" => 2})
-
-  """
-  @spec call_request(String.t(), map()) :: map()
-  def call_request(tool_name, arguments) do
-    %{
-      "jsonrpc" => "2.0",
-      "id" => 1,
-      "method" => "tools/call",
-      "params" => %{
-        "name" => tool_name,
-        "arguments" => arguments
-      }
-    }
-  end
-
-  @doc """
   Asserts that the response was successful, and that audio content was returned.
 
   ## Examples
@@ -42,6 +21,27 @@ defmodule Vancouver.ToolTest do
     |> check_success()
     |> check_type("audio")
     |> get_content()
+  end
+
+  @doc """
+  Creates a valid request body for a tool call request.
+
+  ## Examples
+
+      body = build_call_request("calculate_sum", %{"a" => 1, "b" => 2})
+
+  """
+  @spec build_call_request(String.t(), map()) :: map()
+  def build_call_request(tool_name, arguments) do
+    %{
+      "jsonrpc" => "2.0",
+      "id" => 1,
+      "method" => "tools/call",
+      "params" => %{
+        "name" => tool_name,
+        "arguments" => arguments
+      }
+    }
   end
 
   @doc """

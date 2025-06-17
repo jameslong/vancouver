@@ -27,11 +27,11 @@ defmodule Vancouver.PromptTest do
 
   ## Examples
 
-      body = build_request("code_review", %{"code" => "def hello, do: \"Hello, World!\""})
+      body = build_get_request("code_review", %{"code" => "def hello, do: \"Hello, World!\""})
 
   """
-  @spec build_request(String.t(), map()) :: map()
-  def build_request(prompt_name, arguments) do
+  @spec build_get_request(String.t(), map()) :: map()
+  def build_get_request(prompt_name, arguments) do
     %{
       "jsonrpc" => "2.0",
       "id" => 1,

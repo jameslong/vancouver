@@ -42,7 +42,7 @@ defmodule Vancouver.Tools.TestResponseTest do
   end
 
   defp build_conn(tool_name, tool_arguments) do
-    body = ToolTest.call_request(tool_name, tool_arguments)
+    body = ToolTest.build_call_request(tool_name, tool_arguments)
 
     :post
     |> conn("/", JSON.encode!(body))

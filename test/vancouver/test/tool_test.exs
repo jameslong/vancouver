@@ -7,12 +7,12 @@ defmodule Vancouver.Test.ToolTest do
   alias Vancouver.JsonRpc2
   alias Vancouver.ToolTest
 
-  describe "call_request/3" do
+  describe "build_call_request/2" do
     test "creates a valid call request" do
       tool_name = "test_tool"
       arguments = %{"arg1" => "value1", "arg2" => "value2"}
 
-      assert ToolTest.call_request(tool_name, arguments) == %{
+      assert ToolTest.build_call_request(tool_name, arguments) == %{
                "jsonrpc" => "2.0",
                "id" => 1,
                "method" => "tools/call",
