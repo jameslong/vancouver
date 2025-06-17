@@ -1,6 +1,6 @@
 # Changelog
 
-## [v0.3.0] - 2025-06-17
+## v0.3.0 - 2025-06-17
 
 ### Added
 - **Prompts Support**: Adds support for MCP prompts, including `Vancouver.PromptTest` for easier testing (#13, #14)
@@ -26,7 +26,7 @@ request = Vancouver.ToolTest.call_request(tool_name, arguments)
 request = Vancouver.ToolTest.build_call_request(tool_name, arguments)
 ```
 
-## [v0.2.0](https://github.com/your-repo/vancouver/releases/tag/v0.2.0) - 2025-06-12
+## v0.2.0 - 2025-06-12
 
 ### Breaking Changes
 - **Tool Configuration**: Tools must now be passed as options to `Vancouver.Router` instead of being defined in application config
@@ -48,7 +48,7 @@ request = Vancouver.ToolTest.build_call_request(tool_name, arguments)
 - **Media Response Helpers**: New utilities for sending audio and image responses (#6)
 - **Testing Support**: Introduction of `Vancouver.ToolTest` for easier tool testing (#7)
 
-## [v0.1.1](https://github.com/your-repo/vancouver/releases/tag/v0.1.1) - 2025-05-30
+## v0.1.1 - 2025-05-30
 
 ### Added
 - **Documentation**: Comprehensive documentation and guides (#3)
