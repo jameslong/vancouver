@@ -39,7 +39,7 @@ defmodule Vancouver.Tool do
   - `send_error/2` - sends an error response
   """
 
-  alias Vancouver.JsonRpc2
+  alias Vancouver.JsonRpc
   alias Vancouver.Method
 
   @doc """
@@ -166,7 +166,7 @@ defmodule Vancouver.Tool do
 
   defp send_success(%Plug.Conn{} = conn, result) do
     request_id = conn.body_params["id"]
-    response = JsonRpc2.success_response(request_id, result)
+    response = JsonRpc.success_response(request_id, result)
 
     Method.send_json(conn, response)
   end

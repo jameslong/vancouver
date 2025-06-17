@@ -34,7 +34,7 @@ defmodule Vancouver.Prompt do
   - `send_text/3` - sends a text response
   """
 
-  alias Vancouver.JsonRpc2
+  alias Vancouver.JsonRpc
   alias Vancouver.Method
 
   @type role :: :user | :assistant
@@ -213,7 +213,7 @@ defmodule Vancouver.Prompt do
 
   defp send_success(%Plug.Conn{} = conn, result) do
     request_id = conn.body_params["id"]
-    response = JsonRpc2.success_response(request_id, result)
+    response = JsonRpc.success_response(request_id, result)
 
     Method.send_json(conn, response)
   end

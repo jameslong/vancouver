@@ -4,7 +4,7 @@ defmodule Vancouver.Test.PromptTest do
   import Plug.Conn
   import Plug.Test
 
-  alias Vancouver.JsonRpc2
+  alias Vancouver.JsonRpc
   alias Vancouver.PromptTest
 
   describe "build_get_request/2" do
@@ -151,7 +151,7 @@ defmodule Vancouver.Test.PromptTest do
 
   defp build_success_conn(messages, request_id \\ 1) do
     result = %{"messages" => messages}
-    body = JsonRpc2.success_response(request_id, result)
+    body = JsonRpc.success_response(request_id, result)
 
     conn(:post, "/")
     |> put_req_header("content-type", "application/json")

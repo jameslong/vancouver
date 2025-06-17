@@ -2,7 +2,7 @@ defmodule Vancouver.Methods.Initialize do
   @moduledoc false
 
   import Vancouver.Method
-  alias Vancouver.JsonRpc2
+  alias Vancouver.JsonRpc
 
   def run(conn) do
     request = conn.body_params
@@ -18,7 +18,7 @@ defmodule Vancouver.Methods.Initialize do
       }
     }
 
-    response = JsonRpc2.success_response(request["id"], result)
+    response = JsonRpc.success_response(request["id"], result)
 
     send_json(conn, response)
   end

@@ -2,7 +2,7 @@ defmodule Vancouver.Methods.PromptsGet do
   @moduledoc false
 
   import Vancouver.Method
-  alias Vancouver.JsonRpc2
+  alias Vancouver.JsonRpc
 
   def run(%Plug.Conn{} = conn, prompts) do
     request = conn.body_params
@@ -26,7 +26,7 @@ defmodule Vancouver.Methods.PromptsGet do
   end
 
   defp validate_arguments(prompt, arguments) do
-    case JsonRpc2.validate_schema(prompt.input_schema(), arguments) do
+    case JsonRpc.validate_schema(prompt.input_schema(), arguments) do
       :ok -> :ok
       {:error, reason} -> {:error, {:invalid_params, reason}}
     end
@@ -34,7 +34,7 @@ defmodule Vancouver.Methods.PromptsGet do
 
   defp prompt_not_found(conn, request) do
     data = %{original_request: request}
-    response = JsonRpc2.error_response(:method_not_found, request["id"], data)
+    response = JsonRpc.error_response(:method_not_found, request["id"], data)
 
     send_json(conn, response)
   end
@@ -42,7 +42,7 @@ defmodule Vancouver.Methods.PromptsGet do
   defp invalid_params(conn, request, reason) do
     request_id = request["id"]
     data = %{error: reason, original_request: request}
-    response = JsonRpc2.error_response(:invalid_params, request_id, data)
+    response = JsonRpc.error_response(:invalid_params, request_id, data)
 
     send_json(conn, response)
   end

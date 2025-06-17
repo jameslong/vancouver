@@ -1,4 +1,4 @@
-defmodule Vancouver.JsonRpc2 do
+defmodule Vancouver.JsonRpc do
   @moduledoc false
 
   @error_type_map %{

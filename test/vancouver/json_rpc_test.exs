@@ -1,7 +1,7 @@
-defmodule Vancouver.JsonRpc2Test do
+defmodule Vancouver.JsonRpcTest do
   use ExUnit.Case, async: true
 
-  alias Vancouver.JsonRpc2
+  alias Vancouver.JsonRpc
 
   @error_type_map %{
     parse_error: {-32700, "Parse error"},
@@ -16,7 +16,7 @@ defmodule Vancouver.JsonRpc2Test do
       request_id = 1
       result = %{"key" => "value"}
 
-      assert JsonRpc2.success_response(request_id, result) == %{
+      assert JsonRpc.success_response(request_id, result) == %{
                "jsonrpc" => "2.0",
                "id" => request_id,
                "result" => result
@@ -30,7 +30,7 @@ defmodule Vancouver.JsonRpc2Test do
         request_id = 1
         data = %{"key" => "value"}
 
-        assert JsonRpc2.error_response(error_type, request_id, data) == %{
+        assert JsonRpc.error_response(error_type, request_id, data) == %{
                  "jsonrpc" => "2.0",
                  "id" => request_id,
                  "error" => %{
