@@ -40,6 +40,10 @@ defmodule Vancouver.TestHelpers do
     }
   end
 
+  def prompts_list_request(id \\ 1) do
+    request("prompts/list", %{}, id)
+  end
+
   def tools_list_request(id \\ 1) do
     request("tools/list", %{}, id)
   end

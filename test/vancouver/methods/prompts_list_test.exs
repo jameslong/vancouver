@@ -7,7 +7,7 @@ defmodule Vancouver.Methods.PromptsListTest do
   describe "run/2" do
     test "returns empty prompts list" do
       conn =
-        tools_list_request()
+        prompts_list_request()
         |> request_conn()
         |> PromptsList.run([])
 
