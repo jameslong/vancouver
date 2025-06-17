@@ -7,12 +7,12 @@ defmodule Vancouver.Test.PromptTest do
   alias Vancouver.JsonRpc2
   alias Vancouver.PromptTest
 
-  describe "build_request/2" do
+  describe "build_get_request/2" do
     test "creates a valid get request" do
       prompt_name = "test_prompt"
       arguments = %{"arg1" => "value1", "arg2" => "value2"}
 
-      assert PromptTest.build_request(prompt_name, arguments) == %{
+      assert PromptTest.build_get_request(prompt_name, arguments) == %{
                "jsonrpc" => "2.0",
                "id" => 1,
                "method" => "prompts/get",
