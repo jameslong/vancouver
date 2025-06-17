@@ -4,7 +4,7 @@ defmodule Vancouver.Test.ToolTest do
   import Plug.Conn
   import Plug.Test
 
-  alias Vancouver.JsonRpc2
+  alias Vancouver.JsonRpc
   alias Vancouver.ToolTest
 
   describe "build_call_request/2" do
@@ -190,7 +190,7 @@ defmodule Vancouver.Test.ToolTest do
 
   def build_response_conn(content, request_id \\ 1, is_error \\ false) do
     result = %{"content" => content, "isError" => is_error}
-    body = JsonRpc2.success_response(request_id, result)
+    body = JsonRpc.success_response(request_id, result)
 
     conn(:post, "/")
     |> put_req_header("content-type", "application/json")

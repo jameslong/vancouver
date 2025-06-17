@@ -40,6 +40,14 @@ defmodule Vancouver.TestHelpers do
     }
   end
 
+  def prompts_list_request(id \\ 1) do
+    request("prompts/list", %{}, id)
+  end
+
+  def prompts_get_request(prompt_name, arguments, id \\ 1) do
+    request("prompts/get", %{"name" => prompt_name, "arguments" => arguments}, id)
+  end
+
   def tools_list_request(id \\ 1) do
     request("tools/list", %{}, id)
   end
@@ -56,6 +64,13 @@ defmodule Vancouver.TestHelpers do
     conn(:post, "/")
     |> put_req_header("content-type", "application/json")
     |> Map.put(:body_params, body)
+  end
+
+  def result(conn) do
+    case JSON.decode!(conn.resp_body) do
+      %{"result" => result} -> result
+      _ -> raise "expected response to contain 'result' key, got: #{inspect(conn.resp_body)}"
+    end
   end
 
   def assert_success(conn) do
